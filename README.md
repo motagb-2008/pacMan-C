@@ -1,33 +1,26 @@
-🕹️ Pac-Man em C - Projeto UERJ
+# 🕹️ Pac-Man em C - Projeto UERJ
 
-Disciplina: Construção de Algoritmos (UERJ)
-
-Professor: Eugênio Silva
-
-Linguagem: C
+> **Disciplina:** Construção de Algoritmos (UERJ)  
+> **Professor:** Eugênio Silva  
+> **Linguagem:** C
 
 Este projeto é uma implementação simplificada do jogo clássico Pac-Man, rodando diretamente no terminal, cumprindo os requisitos de modularização e uso de arquivos do trabalho da disciplina.
 
-🎯 Funcionalidades
+## 🎯 Funcionalidades
 
-[x] Leitura de mapas a partir de arquivos .txt (cenários aleatórios).
+- [x] Leitura de mapas a partir de arquivos `.txt` (cenários aleatórios).
+- [x] Movimentação do jogador (Teclas `W`, `A`, `S`, `D`).
+- [x] Placar dinâmico (pontos coletados e restantes).
+- [x] Sistema de colisão e fim de jogo.
+- [x] **Dificuldades:**
+  - 🟢 **Fácil:** Fantasmas se movem aleatoriamente.
+  - 🔴 **Difícil:** Fantasmas perseguem ativamente o jogador.
 
-[x] Movimentação do jogador (Teclas W, A, S, D).
-
-[x] Placar dinâmico (pontos coletados e restantes).
-
-[x] Sistema de colisão e fim de jogo.
-
-[x] Dificuldades:
-
-🟢 Fácil: Fantasmas se movem aleatoriamente.
-
-🔴 Difícil: Fantasmas perseguem ativamente o jogador.
-
-📂 Estrutura de Diretórios
+## 📂 Estrutura de Diretórios
 
 Para manter o código limpo, o projeto utiliza a seguinte arquitetura de pastas:
 
+```text
 meu_pacman/
 ├── data/                   # Mapas em txt (mapa1.txt, mapa2.txt)
 ├── include/                # Headers (.h)
@@ -43,12 +36,13 @@ meu_pacman/
     └── entidades/
         ├── jogador.c       
         └── fantasmas.c     
+```
 
+## 🚀 Como Compilar e Rodar
 
-🚀 Como Compilar e Rodar
+Certifique-se de ter o compilador `gcc` instalado. No terminal, na raiz do projeto, execute os comandos abaixo:
 
-Certifique-se de ter o compilador gcc instalado. No terminal, na raiz do projeto, execute os comandos abaixo:
-
+```bash
 # Compilando o projeto
 gcc src/main.c src/config/mapa_loader.c src/core/motor_jogo.c src/entidades/jogador.c src/entidades/fantasmas.c -I include -o pacman
 
@@ -57,3 +51,4 @@ gcc src/main.c src/config/mapa_loader.c src/core/motor_jogo.c src/entidades/joga
 
 # Rodando o jogo (Windows)
 pacman.exe
+```
