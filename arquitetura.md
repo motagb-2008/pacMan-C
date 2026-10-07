@@ -1,26 +1,26 @@
-Arquitetura do Sistema e Estruturas de Dados
+🏗️ Arquitetura do Sistema e Estruturas de Dados
+
+Para evitar o uso de variáveis globais e manter o código modular (como exigido no trabalho), o jogo concentra seu estado em estruturas de dados passadas por referência (ponteiros).
 
 1. Estruturas de Dados Principais (include/core.h)
 
-Para gerenciar o jogo de forma eficiente sem variáveis globais soltas, utilize estruturas (structs):
-
-// Representa uma coordenada no mapa
+// Representa uma coordenada 2D no mapa
 typedef struct {
     int x;
     int y;
 } Posicao;
 
-// Representa um fantasma
+// Representa a entidade Fantasma
 typedef struct {
     Posicao pos;
-    char itemAnterior; // Guarda o que estava no mapa ('.' ou ' ') antes do fantasma pisar
+    char itemAnterior; // Guarda o que estava no mapa ('.' ou ' ') antes do fantasma passar
 } Fantasma;
 
-// Guarda o estado geral da partida
+// Guarda o estado global da partida
 typedef struct {
-    char mapa[MAX_LINHAS][MAX_COLUNAS];
+    char mapa[20][25];
     Posicao jogador;
-    Fantasma fantasmas[MAX_FANTASMAS];
+    Fantasma fantasmas[10];
     int qtdFantasmas;
     int pontosColetados;
     int pontosRestantes;
@@ -28,40 +28,62 @@ typedef struct {
 } EstadoJogo;
 
 
-2. Divisão de Módulos (Headers)
+2. Assinaturas e Módulos (Headers)
 
-include/config.h (Gerenciamento de Arquivos)
+⚙️ include/config.h (Gerenciamento de Arquivos)
 
-void carregarMapaAleatorio(EstadoJogo *jogo); -> Sorteia um arquivo .txt da pasta data/, lê as linhas, preenche a matriz jogo->mapa e inicializa as posições do jogador e dos fantasmas.
+void carregarMapaAleatorio(EstadoJogo *jogo);
 
-include/entidades.h (Lógica de Movimento)
+Sorteia um arquivo .txt da pasta data/.
 
-void moverJogador(EstadoJogo *jogo, char direcao); -> Calcula nova posição baseada em W, A, S, D. Valida paredes e atualiza pontuação.
+Preenche a matriz jogo->mapa.
 
-void moverFantasmas(EstadoJogo *jogo); -> Itera sobre o vetor de fantasmas e chama a lógica de movimento baseada na dificuldade.
+Identifica posições iniciais de P (Jogador) e G (Fantasmas).
 
-include/core.h (Fluxo e Renderização)
+🏃 include/entidades.h (Lógica de Movimento)
 
-void exibirMapa(EstadoJogo *jogo); -> Limpa o console e imprime a matriz e os pontos.
+void moverJogador(EstadoJogo *jogo, char direcao);
 
-int verificarFimDeJogo(EstadoJogo *jogo); -> Retorna status de vitória, derrota ou jogo rodando.
+Calcula o vetor direção com base em W, A, S, D.
 
-3. Lógica da Dificuldade dos Fantasmas
+Checa colisão com paredes (#).
 
-A IA será decidida pela variável jogo->dificuldade.
+void moverFantasmas(EstadoJogo *jogo);
 
-Modo Fácil (Aleatório):
-Gere um número de 0 a 3 usando rand() % 4. Cada número representa uma direção (Cima, Baixo, Esquerda, Direita). Verifique se a direção não é uma parede (#). Se for, tente outro número até achar um caminho livre.
+Itera o vetor jogo->fantasmas e chama a IA correspondente.
 
-Modo Difícil (Perseguição Básica - Eixo dominante):
-A forma mais fácil de implementar perseguição sem algoritmos complexos (como A* ou Dijkstra) é a comparação de eixos:
+🖥️ include/core.h (Fluxo e Renderização)
 
-Compare a posição do Fantasma (fx, fy) com a do Jogador (jx, jy).
+void exibirMapa(EstadoJogo *jogo);
 
-Calcule a distância horizontal (|fx - jx|) e vertical (|fy - jy|).
+Limpa o console (system("clear") ou system("cls")).
 
-O fantasma deve priorizar mover-se no eixo onde a distância é maior.
+Imprime a matriz e os pontos.
 
-Exemplo: Se o jogador está muito mais para a direita do que para baixo, o fantasma tenta ir para a Direita.
+int verificarFimDeJogo(EstadoJogo *jogo);
 
-Mecanismo de Destravamento: Se a direção ideal for uma parede (#), o fantasma deve "desviar", escolhendo mover-se no eixo secundário ou de forma aleatória para não ficar preso.
+Retorna 0 (Rodando), 1 (Vitória) ou -1 (Derrota).
+
+3. Lógica da Inteligência Artificial (Fantasmas)
+
+A tomada de decisão dos fantasmas depende da variável jogo->dificuldade:
+
+🟢 Modo Fácil (Movimento Aleatório)
+
+Gera uma direção via rand() % 4 (0=Cima, 1=Baixo, 2=Esquerda, 3=Direita).
+
+Valida se a próxima posição não é uma parede (#).
+
+Se for parede, sorteia novamente (até o limite de tentativas).
+
+🔴 Modo Difícil (Perseguição por Eixo Dominante)
+
+Calcula a distância Absoluta (Delta) em X e Y:
+
+deltaX = |fantasma.x - jogador.x|
+
+deltaY = |fantasma.y - jogador.y|
+
+Identifica o Eixo Dominante: se deltaX > deltaY, o fantasma tenta primeiro se mover na horizontal (para a esquerda ou direita, dependendo de onde o jogador está).
+
+Mecanismo Anti-Travamento (Fallback): Se o movimento no eixo dominante for bloqueado por uma parede, ele tenta o eixo secundário. Se ambos estiverem bloqueados, escolhe uma direção aleatória para desviar.

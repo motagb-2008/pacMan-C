@@ -1,52 +1,59 @@
-Pac-Man em C - Projeto UERJ
+🕹️ Pac-Man em C - Projeto UERJ
 
-Este projeto é uma implementação simplificada do jogo clássico Pac-Man, desenvolvido em linguagem C para a disciplina de Construção de Algoritmos (UERJ).
+Disciplina: Construção de Algoritmos (UERJ)
+
+Professor: Eugênio Silva
+
+Linguagem: C
+
+Este projeto é uma implementação simplificada do jogo clássico Pac-Man, rodando diretamente no terminal, cumprindo os requisitos de modularização e uso de arquivos do trabalho da disciplina.
 
 🎯 Funcionalidades
 
-Leitura de mapas a partir de arquivos de texto (aleatoriedade de cenários).
+[x] Leitura de mapas a partir de arquivos .txt (cenários aleatórios).
 
-Movimentação do jogador (Teclas W, A, S, D).
+[x] Movimentação do jogador (Teclas W, A, S, D).
 
-Contagem de pontos coletados e restantes.
+[x] Placar dinâmico (pontos coletados e restantes).
 
-Sistema de colisão e condições de vitória/derrota.
+[x] Sistema de colisão e fim de jogo.
 
-Dois níveis de dificuldade:
+[x] Dificuldades:
 
-Fácil: Fantasmas se movem aleatoriamente.
+🟢 Fácil: Fantasmas se movem aleatoriamente.
 
-Difícil: Fantasmas perseguem ativamente o jogador.
+🔴 Difícil: Fantasmas perseguem ativamente o jogador.
 
-📂 Estrutura de Diretórios Sugerida
+📂 Estrutura de Diretórios
 
-Para manter o código limpo e modularizado, a estrutura do projeto foi dividida da seguinte forma:
+Para manter o código limpo, o projeto utiliza a seguinte arquitetura de pastas:
 
 meu_pacman/
-│
-├── data/                   # Arquivos de texto contendo os mapas (ex: mapa1.txt, mapa2.txt)
-│
-├── include/                # Arquivos de cabeçalho (.h)
+├── data/                   # Mapas em txt (mapa1.txt, mapa2.txt)
+├── include/                # Headers (.h)
 │   ├── config.h
 │   ├── core.h
 │   └── entidades.h
-│
 └── src/                    # Código-fonte (.c)
-    ├── main.c              # Ponto de entrada e Menu Principal
+    ├── main.c              
     ├── config/
-    │   └── mapa_loader.c   # Lógica para ler e carregar arquivos .txt
+    │   └── mapa_loader.c   
     ├── core/
-    │   └── motor_jogo.c    # Lógica de renderização, loop principal e colisões
+    │   └── motor_jogo.c    
     └── entidades/
-        ├── jogador.c       # Lógica de movimentação do Pac-Man e coleta de pontos
-        └── fantasmas.c     # IA dos fantasmas (Fácil e Difícil)
+        ├── jogador.c       
+        └── fantasmas.c     
 
 
-🚀 Como Compilar
+🚀 Como Compilar e Rodar
 
-Para compilar o projeto inteiro, você deve referenciar todos os arquivos .c no GCC. Exemplo (estando na pasta raiz do projeto):
+Certifique-se de ter o compilador gcc instalado. No terminal, na raiz do projeto, execute os comandos abaixo:
 
+# Compilando o projeto
 gcc src/main.c src/config/mapa_loader.c src/core/motor_jogo.c src/entidades/jogador.c src/entidades/fantasmas.c -I include -o pacman
 
+# Rodando o jogo (Linux/Mac)
+./pacman
 
-(A flag -I include diz ao compilador para procurar os arquivos .h na pasta include)
+# Rodando o jogo (Windows)
+pacman.exe

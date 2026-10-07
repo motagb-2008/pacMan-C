@@ -1,53 +1,57 @@
-Roadmap de Desenvolvimento (Passo a Passo)
+🗺️ Roadmap de Desenvolvimento (Passo a Passo)
 
-Siga esta ordem para evitar frustrações. Teste cada etapa exaustivamente antes de passar para a próxima.
+Siga esta ordem para evitar frustrações. Teste cada etapa isoladamente antes de avançar para a próxima.
 
-Fase 1: Fundação e Carregamento (Arquivos main.c e mapa_loader.c)
+Fase 1: Estrutura Base e Leitura de Arquivo
 
-[ ] Crie a estrutura de pastas e os arquivos iniciais vazios.
+[ ] Criar a estrutura de pastas (src/, include/, data/).
 
-[ ] Defina as structs básicas no core.h.
+[ ] Criar os arquivos de cabeçalho (.h) com as definições das structs.
 
-[ ] Crie 2 ou 3 arquivos .txt de mapas na pasta data/.
+[ ] Criar pelo menos dois cenários .txt na pasta data/ seguindo o modelo do trabalho.
 
-[ ] Implemente a função de ler o arquivo .txt e imprimir a matriz na tela (printf).
+[ ] Implementar a função para ler o arquivo .txt e imprimir a matriz pura no terminal.
 
-[ ] Identifique, durante a leitura, onde está o 'P', os 'G's e conte os pontos '.'.
+Fase 2: Mapeamento e Renderização
 
-Fase 2: O Pac-Man Vive (jogador.c e motor_jogo.c)
+[ ] Implementar a função que varre a matriz carregada e encontra a coordenada x, y do jogador (P) e dos fantasmas (G).
 
-[ ] Implemente o loop principal no main.c (while(jogo_rodando) { ... }).
+[ ] Contar quantos pontos (.) existem no mapa e salvar em pontosRestantes.
 
-[ ] Capture a tecla do usuário (usando a dica do <conio.h> ou <termios.h> para não precisar dar Enter).
+[ ] Implementar a função de limpar a tela e redesenhar o mapa com o placar de pontos.
 
-[ ] Implemente a função moverJogador(). Teste se ele bate na parede e para.
+Fase 3: Movimentação do Jogador
 
-[ ] Faça o jogador "comer" os pontos: substitua o '.' por ' ' (espaço) e atualize os contadores.
+[ ] Capturar a tecla do usuário (W, A, S, D).
 
-[ ] Atualize a função de renderizar para mostrar o placar.
+[ ] Fazer o jogador se mover (trocando o P de lugar na matriz com um espaço vazio  ).
 
-Fase 3: Fantasmas - Modo Fácil (fantasmas.c)
+[ ] Implementar a verificação de parede (impedir que o P ande por cima de um #).
 
-[ ] Implemente a lógica de movimento aleatório para um único fantasma.
+[ ] Fazer o jogador "comer" os pontos (.), somando em pontosColetados e diminuindo de pontosRestantes.
 
-[ ] Crucial: Lembre-se de salvar o item que o fantasma está pisando! Quando ele sai de cima de um ponto '.', ele deve recolocar o '.', não um espaço vazio.
+Fase 4: O Básico dos Fantasmas (Modo Fácil)
 
-[ ] Expanda a lógica para o vetor de múltiplos fantasmas.
+[ ] Criar o menu inicial perguntando a dificuldade (1 = Fácil, 2 = Difícil).
 
-Fase 4: O Menu e o Modo Difícil (Integração)
+[ ] Implementar o loop onde cada fantasma escolhe uma direção aleatória.
 
-[ ] No main.c, antes de carregar o mapa, crie um menu simples de "1- Fácil / 2- Difícil".
+[ ] Garantir que o fantasma não apague os pontos (.) quando passar por cima deles (usar a variável itemAnterior da struct).
 
-[ ] Implemente a lógica de perseguição dos fantasmas (comparação de eixos) no fantasmas.c.
+[ ] Implementar a checagem de Game Over (se a coordenada do jogador for igual à do fantasma).
 
-[ ] Teste exaustivamente se os fantasmas não travam em cantos no modo difícil.
+Fase 5: Inteligência Artificial (Modo Difícil)
 
-Fase 5: Regras de Jogo e Polimento Final
+[ ] Implementar a lógica matemática de aproximação (comparar o x e o y do fantasma com o do jogador).
 
-[ ] Implemente a checagem de colisão (Jogador e Fantasma no mesmo 'X' e 'Y').
+[ ] Testar se o fantasma persegue corretamente sem atravessar paredes.
 
-[ ] Implemente a checagem de vitória (Pontos restantes == 0).
+[ ] Adicionar o "fallback" (se ele bater de frente com uma parede tentando seguir o jogador, ele deve tentar desviar pelos lados).
 
-[ ] Adicione telas de "Fim de Jogo" (Você Venceu / Game Over).
+Fase 6: Polimento Final
 
-[ ] Revise o código, coloque o nome da dupla como comentário no main.c (conforme exigido pelo professor).
+[ ] Verificar se o jogo encerra e mostra a mensagem de "Vitória" quando pontosRestantes == 0.
+
+[ ] Revisar se não há nenhum include de arquivo .c solto (apenas .h).
+
+[ ] Testar no laboratório ou no sistema Windows/Linux para garantir a compatibilidade (especialmente a parte de limpar a tela).
