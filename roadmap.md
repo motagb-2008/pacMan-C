@@ -3,10 +3,10 @@
 Siga esta ordem para evitar frustrações. Teste cada etapa isoladamente antes de avançar para a próxima.
 
 ## Fase 1: Estrutura Base e Leitura de Arquivo
-- [ ] Criar a estrutura de pastas (`src/`, `include/`, `data/`).
+- [X] Criar a estrutura de pastas (`src/`, `include/`, `data/`).
 - [ ] Criar os arquivos de cabeçalho (`.h`) com as definições das `structs`.
-- [ ] Criar pelo menos dois cenários `.txt` na pasta `data/` seguindo o modelo do trabalho.
-- [ ] Implementar a função para ler o arquivo `.txt` e imprimir a matriz pura no terminal.
+- [X] Criar pelo menos dois cenários `.txt` na pasta `data/` seguindo o modelo do trabalho.
+- [X] Implementar a função para ler o arquivo `.txt` e imprimir a matriz pura no terminal.
 
 ## Fase 2: Mapeamento e Renderização
 - [ ] Implementar a função que varre a matriz carregada e encontra a coordenada `x, y` do jogador (`P`) e dos fantasmas (`G`).
