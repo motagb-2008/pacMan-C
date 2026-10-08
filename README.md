@@ -44,11 +44,12 @@ Certifique-se de ter o compilador `gcc` instalado. No terminal, na raiz do proje
 
 ```bash
 # Compilando o projeto
-gcc src/main.c src/config/mapa_loader.c src/core/motor_jogo.c src/entidades/jogador.c src/entidades/fantasmas.c -I include -o pacman
+
+gcc src\main.c src\config\carregar_mapa.c -I include -o src\output\pacman.exe
 
 # Rodando o jogo (Linux/Mac)
 ./pacman
 
 # Rodando o jogo (Windows)
-pacman.exe
+.\src\output\pacman.exe                                                      
 ```
