@@ -45,7 +45,7 @@ Certifique-se de ter o compilador `gcc` instalado. No terminal, na raiz do proje
 ```bash
 # Compilando o projeto
 
-gcc src\main.c src\config\carregar_mapa.c -I include -o src\output\pacman.exe
+gcc src\main.c src\config\mapa.c -I include -o src\output\pacman.exe   
 
 # Rodando o jogo (Linux/Mac)
 ./pacman
