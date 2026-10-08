@@ -9,7 +9,7 @@ Siga esta ordem para evitar frustrações. Teste cada etapa isoladamente antes d
 - [X] Implementar a função para ler o arquivo `.txt` e imprimir a matriz pura no terminal.
 
 ## Fase 2: Mapeamento e Renderização
-- [x ] Implementar a função que varre a matriz carregada e encontra a coordenada `x, y` do jogador (`P`) e dos fantasmas (`G`).
+- [ ] Implementar a função que varre a matriz carregada e encontra a coordenada `x, y` do jogador (`P`) e dos fantasmas (`G`).
 - [ ] Contar quantos pontos (`.`) existem no mapa e salvar em `pontosRestantes`.
 - [ ] Implementar a função de limpar a tela e redesenhar o mapa com o placar de pontos.
 
